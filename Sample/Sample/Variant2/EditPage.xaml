@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Sample.Variant2.EditPage"
+             Title="Edit (MVVM)">
+    <ScrollView>
+        <StackLayout Margin="15">
+
+            <!--Close button for modal-->
+            <Button IsVisible="{Binding IsModal}"
+                    Margin="0,15,0,0"
+                    Text="Close"
+                    Command="{Binding CommandClose}"/>
+
+            <!--Save button-->
+            <Button Text="Save"
+                    Command="{Binding CommandSave}"/>
+
+            <Label Text="Name" Margin="0,10,0,0"/>
+            <Entry Text="{Binding Name}"
+                   FontSize="20"/>
+
+            <Label Text="Family" Margin="0,10,0,0"/>
+            <Entry Text="{Binding Family}"
+                   FontSize="20"/>
+
+            <Label Text="Date birth" Margin="0,10,0,0"/>
+            <DatePicker Date="{Binding DateBirth}"
+                        HorizontalOptions="StartAndExpand"
+                        FontSize="20"/>
+
+            <Label Text="Email" Margin="0,10,0,0"/>
+            <Entry Text="{Binding Email}"
+                   FontSize="20"/>
+
+            <Label Text="About me" Margin="0,10,0,0"/>
+            <Entry Text="{Binding AboutMe}"
+                   FontSize="20"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
