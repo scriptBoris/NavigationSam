@@ -4,6 +4,21 @@ Allows can intercept navigation back by user for Xamarin.Forms
 ## Nuget Installation
 https://www.nuget.org/packages/NavigationSam
 
+<table>
+	<thead>
+		<tr>
+			<th>Droid</th>
+			<th>UWP</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><img src="Nuget/1.gif" width="300" /></td>
+			<td><img src="Nuget/3.gif" width="300" /></td>
+		</tr>
+  </tbody>
+</table>
+
 ## Supported Platforms
  - Android
  - iOS
