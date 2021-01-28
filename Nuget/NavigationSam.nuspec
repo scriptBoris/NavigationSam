@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>NavigationSam</id>
+    <version>1.0.0</version>
+    <authors>Boris Krit</authors>
+    <description>Allows intercept navigation back by user for Xamarin.Forms</description>
+    <title>NavigationSam</title>
+
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/scriptboris/NavigationSam</projectUrl>
+    <icon>images\icon.png</icon>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <copyright>Copyright 2019</copyright>
+    <tags>xamarin xamarin-forms navigation override back intercept</tags>
+    <repository type="git" url="https://github.com/scriptBoris/TouchSam.git"/>
+    <dependencies>
+      <dependency id="Xamarin.Forms" version="4.5.0.725"/>
+    </dependencies>
+    <releaseNotes>
+- The first version of this package
+    </releaseNotes>
+  </metadata>
+	<files>
+    <!--Icon-->
+	  <file src="icon.png" target="images\" />
+	  <!--NETStandard-->
+	  <file src="..\Lib\NavigationSam\bin\Release\netstandard2.0\NavigationSam.dll" target="lib\netstandard2.0" />
+	  <file src="..\Lib\NavigationSam\bin\Release\netstandard2.0\NavigationSam.pdb" target="lib\netstandard2.0" />
+	  <!--Android-->
+	  <file src="..\Lib\NavigationSam\bin\Release\netstandard2.0\NavigationSam.dll" target="lib\MonoAndroid" />
+	  <file src="..\Lib\NavigationSam\bin\Release\netstandard2.0\NavigationSam.pdb" target="lib\MonoAndroid" />
+	  <file src="..\Lib\NavigationSam.Droid\bin\Release\NavigationSam.Droid.dll" target="lib\MonoAndroid" />
+	  <file src="..\Lib\NavigationSam.Droid\bin\Release\NavigationSam.Droid.pdb" target="lib\MonoAndroid" />
+	  <!--UWP-->
+	  <file src="..\Lib\NavigationSam\bin\Release\netstandard2.0\NavigationSam.dll" target="lib\uap" />
+	  <file src="..\Lib\NavigationSam\bin\Release\netstandard2.0\NavigationSam.pdb" target="lib\uap" />
+    <file src="..\Lib\NavigationSam.UWP\bin\Release\NavigationSam.UWP.dll" target="lib\uap" />
+	  <file src="..\Lib\NavigationSam.UWP\bin\Release\NavigationSam.UWP.pdb" target="lib\uap" />
+    <!--iOS-->
+	  <file src="..\Lib\NavigationSam\bin\Release\netstandard2.0\NavigationSam.dll" target="lib\Xamarin.iOS10" />
+	  <file src="..\Lib\NavigationSam\bin\Release\netstandard2.0\NavigationSam.pdb" target="lib\Xamarin.iOS10" />
+	  <file src="..\Lib\NavigationSam.iOS\bin\Release\NavigationSam.iOS.dll" target="lib\Xamarin.iOS10" />
+	  <file src="..\Lib\NavigationSam.iOS\bin\Release\NavigationSam.iOS.pdb" target="lib\Xamarin.iOS10" />
+	</files>
+</package>
