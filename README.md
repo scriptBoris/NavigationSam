@@ -5,26 +5,26 @@ Allows can intercept navigation back by user for Xamarin.Forms
 https://www.nuget.org/packages/NavigationSam
 
 <table>
-	<thead>
-		<tr>
-			<th>Droid</th>
-			<th>iOS</th>
-			<th>UWP</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td><img src="Nuget/1.gif" width="300" /></td>
-			<td><img src="Nuget/2.gif" width="300" /></td>
-			<td><img src="Nuget/3.gif" width="300" /></td>
-		</tr>
+  <thead>
+    <tr>
+      <th>Droid</th>
+      <th>iOS</th>
+      <th>UWP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="Nuget/1.gif" width="300" /></td>
+      <td><img src="Nuget/2.gif" width="300" /></td>
+      <td><img src="Nuget/3.gif" width="300" /></td>
+    </tr>
   </tbody>
 </table>
 
 ## Supported Platforms
  - Android
  - iOS
- - UWP not support (use native method OnBackButtonPressed)
+ - UWP not support (use native method OnBackButtonPressed, see example)
  
  
  ## Install android project
@@ -62,8 +62,7 @@ public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsAppli
 }
 ```
 
-
-## To use interception in UWP, use the method OnBackButtonPressed
+# Example
 
 ```c#
 public partial class SamplePage : ContentPage, INavigationPopInterceptor
@@ -85,6 +84,7 @@ public partial class SamplePage : ContentPage, INavigationPopInterceptor
           return res;
      }
      
+     // For UWP
      protected override bool OnBackButtonPressed()
      {
           Device.BeginInvokeOnMainThread(async () =>
@@ -94,6 +94,30 @@ public partial class SamplePage : ContentPage, INavigationPopInterceptor
                     await Navigation.PopAsync();
           });
           return true;
+     }
+}
+```
+
+# Example MVVM
+For UWP need realization method OnBackButtonPressed for Page. For detail see Sample project
+```c#
+public class SampleVm : BaseViewModel, INavigationPopInterceptor
+{
+     public SampleVm()
+     {
+          //Do something...
+     }
+     
+     public async Task<bool> RequestPop()
+     {
+          bool res = true;
+
+          if (CheckChanges())
+              res = await Page.DisplayAlert("Warning",
+                  "If you exit, all unsaved changes will be lost", 
+                  "Exit", "Cancel");
+
+          return res;
      }
 }
 ```
