@@ -63,7 +63,15 @@ public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsAppli
 ```
 
 # Example
-
+For Xamarin.Forms entry point
+```c#
+public partial class App : Application
+{
+     InitializeComponent();
+     MainPage = new NavigationPageSam(new MainPage());
+}
+```
+For pages
 ```c#
 public partial class SamplePage : ContentPage, INavigationPopInterceptor
 {
@@ -99,7 +107,10 @@ public partial class SamplePage : ContentPage, INavigationPopInterceptor
 ```
 
 # Example MVVM
-For UWP need realization method OnBackButtonPressed for Page. For detail see Sample project
+Same as above. 
+INavigationPopInterceptor can implement to ViewModel
+
+Warning: for UWP need realization method OnBackButtonPressed for Page. For detail see Sample project
 ```c#
 public class SampleVm : BaseViewModel, INavigationPopInterceptor
 {
