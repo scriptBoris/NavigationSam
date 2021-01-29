@@ -34,6 +34,12 @@ namespace NavigationSam
                 interceptor = vmInterceptor;
             }
 
+            int count = GetNavigationCount();
+            // For iOS, we are ignore back button intercept for root page
+            if (count == 1 && Device.RuntimePlatform == Device.iOS)
+            {
+                return;
+            }
 
             if (interceptor != null)
             {
@@ -52,7 +58,6 @@ namespace NavigationSam
                     }
                     else
                     {
-                        int count = GetNavigationCount();
                         if (count == 1)
                         {
                             popResult.IsContinueHardwareButton = true;

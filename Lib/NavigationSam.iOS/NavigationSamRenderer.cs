@@ -15,7 +15,7 @@ using Xamarin.Forms.Platform.iOS;
 namespace NavigationSam.iOS
 {
     [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
-    public class NavigationSamRenderer : NavigationRenderer
+    public class NavigationSamRenderer : NavigationRenderer, IUIGestureRecognizerDelegate
     {
         public static void Preserve() { }
 
@@ -23,13 +23,15 @@ namespace NavigationSam.iOS
         {
         }
 
-        protected override void OnElementChanged(VisualElementChangedEventArgs e)
-        {
-            base.OnElementChanged(e);
-        }
-
         private NavigationPageSam NavPage => Element as NavigationPageSam;
 
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+            InteractivePopGestureRecognizer.Delegate = new SwipeBack(NavPage);
+        }
+
+        // Software button back
         public override UIViewController PopViewController(bool animated)
         {
             Device.BeginInvokeOnMainThread(async () =>
@@ -37,6 +39,28 @@ namespace NavigationSam.iOS
                 await NavPage.CatchBackButton(PopSources.SoftwareBackButton, new PopResult());
             });
             return null;
+        }
+    }
+
+    public class SwipeBack : UIGestureRecognizerDelegate
+    {
+        private readonly NavigationPageSam navPage;
+
+        public static void Preserve() { }
+
+        public SwipeBack(NavigationPageSam navPage)
+        {
+            this.navPage = navPage;
+        }
+
+        // Swipe back
+        public override bool ShouldBegin(UIGestureRecognizer recognizer)
+        {
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                await navPage.CatchBackButton(PopSources.SoftwareBackButton, new PopResult());
+            });
+            return false;
         }
     }
 }

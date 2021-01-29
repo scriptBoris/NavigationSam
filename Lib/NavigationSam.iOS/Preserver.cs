@@ -14,6 +14,7 @@ namespace NavigationSam.iOS
             NavigationPageSam.Preserve();
             Utils.PopResult.Preserve();
             NavigationSamRenderer.Preserve();
+            SwipeBack.Preserve();
         }
     }
 }
