@@ -8,12 +8,14 @@ https://www.nuget.org/packages/NavigationSam
 	<thead>
 		<tr>
 			<th>Droid</th>
+			<th>iOS</th>
 			<th>UWP</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
 			<td><img src="Nuget/1.gif" width="300" /></td>
+			<td><img src="Nuget/2.gif" width="300" /></td>
 			<td><img src="Nuget/3.gif" width="300" /></td>
 		</tr>
   </tbody>
