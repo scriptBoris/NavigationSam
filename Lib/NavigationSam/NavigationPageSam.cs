@@ -11,6 +11,10 @@ namespace NavigationSam
     {
         public static void Preserve() { }
 
+        public NavigationPageSam() : base()
+        {
+        }
+
         public NavigationPageSam(Page root) : base(root)
         {
         }
