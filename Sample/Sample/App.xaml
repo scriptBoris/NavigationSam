@@ -3,6 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Sample.App">
     <Application.Resources>
+        <Color x:Key="NavigationBarColor">#6d4585</Color>
+        <Color x:Key="NavigationBarTextColor">#FFF</Color>
 
+        <Style TargetType="NavigationPage">
+            <Setter Property="BarBackgroundColor" Value="{StaticResource NavigationBarColor}" />
+            <Setter Property="BarTextColor" Value="{StaticResource NavigationBarTextColor}" />
+        </Style>
     </Application.Resources>
 </Application>
