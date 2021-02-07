@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:navSam="clr-namespace:NavigationSam;assembly=NavigationSam"
              x:Class="Sample.App">
     <Application.Resources>
         <Color x:Key="NavigationBarColor">#6d4585</Color>
         <Color x:Key="NavigationBarTextColor">#FFF</Color>
 
-        <Style TargetType="NavigationPage">
+        <Style TargetType="{Type navSam:NavigationPageSam}">
             <Setter Property="BarBackgroundColor" Value="{StaticResource NavigationBarColor}" />
             <Setter Property="BarTextColor" Value="{StaticResource NavigationBarTextColor}" />
         </Style>
