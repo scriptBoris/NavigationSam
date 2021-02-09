@@ -56,7 +56,12 @@ namespace Sample.Variant1
                     res = await RequestPop();
 
                 if (res)
-                    await Navigation.PopAsync();
+                {
+                    if (IsModal)
+                        await Navigation.PopModalAsync();
+                    else
+                        await Navigation.PopAsync();
+                }
             });
             return true;
         }
@@ -93,7 +98,12 @@ namespace Sample.Variant1
         private async void OnClickedClose(object sender, EventArgs e)
         {
             if (await RequestPop())
-                await Navigation.PopModalAsync();
+            {
+                if (IsModal)
+                    await Navigation.PopModalAsync();
+                else
+                    await Navigation.PopAsync();
+            }
         }
 
         private void OnClickedSave(object sender, EventArgs e)

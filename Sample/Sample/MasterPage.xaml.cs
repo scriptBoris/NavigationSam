@@ -28,7 +28,8 @@ namespace Sample
 
             // Disable swipe master menu for demonstration iOS (iPhone X)
             // allow to use system swipe back
-            IsGestureEnabled = false;
+            if (Device.RuntimePlatform == Device.iOS)
+                IsGestureEnabled = false;
 
             Detail = nav1;
         }
@@ -44,5 +45,7 @@ namespace Sample
             Detail = nav2;
             IsPresented = !IsPresented;
         }
+
+
     }
 }

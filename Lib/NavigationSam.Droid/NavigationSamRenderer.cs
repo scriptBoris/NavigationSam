@@ -1,4 +1,5 @@
 ﻿using Android.Content;
+using Android.Views;
 using NavigationSam;
 using NavigationSam.Droid;
 using NavigationSam.Utils;
@@ -9,7 +10,7 @@ using Xamarin.Forms.Internals;
 using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms.Platform.Android.AppCompat;
 using static Android.Views.View;
-//using AToolbar = AndroidX.AppCompat.Widget.Toolbar;
+using XfView = Xamarin.Forms.View;
 
 [assembly: ExportRenderer(typeof(NavigationPageSam), typeof(NavigationSamRenderer))]
 namespace NavigationSam.Droid
@@ -17,46 +18,45 @@ namespace NavigationSam.Droid
     [Preserve(AllMembers = true)]
     public class NavigationSamRenderer : NavigationPageRenderer, IOnClickListener
     {
-        private Android.Support.V7.Widget.Toolbar _toolbar;
-
         public static void Preserve() { }
 
         public NavigationSamRenderer(Context context) : base(context)
         {
             FormsAppCompatActivitySam.BackPressedSam += OnBackPressed;
+            Device.Info.PropertyChanged += OnDevicePropertyChanged;
         }
 
         private NavigationPageSam NavPage => Element as NavigationPageSam;
-
+        private IPageController PageController => Element;
 
         #region override
         /// <summary>
-        /// Click "Button arrow back" without master page
+        /// Click "Button arrow back"
         /// </summary>
         async void IOnClickListener.OnClick(Android.Views.View v)
         {
-            await NavPage.CatchBackButton(PopSources.SoftwareBackButton, new PopResult());
+            var mp = GetMasterPage();
+
+            if (mp == null || Element.Navigation.NavigationStack.Count > 1)
+            {
+                await NavPage.CatchBackButton(PopSources.SoftwareBackButton, new PopResult());
+            }
+            else
+            {
+                mp.IsPresented = !mp.IsPresented;
+            }
         }
 
         protected override void OnLayout(bool changed, int l, int t, int r, int b)
         {
             base.OnLayout(changed, l, t, r, b);
+            UpdateToolbarInterceptFunctional();
+        }
 
-            if (_toolbar == null)
-            {
-                System.Collections.Generic.List<View> views = new System.Collections.Generic.List<View>();
-                for (int i = 0; i < ChildCount; i++)
-                {
-                    var child = GetChildAt(i);
-                    views.Add(child);
-
-                    if (child is Android.Support.V7.Widget.Toolbar toolbar)
-                    {
-                        _toolbar = toolbar;
-                        _toolbar.NavigationClick += OnNavigationClick;
-                    }
-                }
-            }
+        protected override void OnAttachedToWindow()
+        {
+            base.OnAttachedToWindow();
+            UpdateToolbarInterceptFunctional();
         }
 
         protected override void Dispose(bool disposing)
@@ -64,42 +64,58 @@ namespace NavigationSam.Droid
             base.Dispose(disposing);
 
             FormsAppCompatActivitySam.BackPressedSam -= OnBackPressed;
-
-            if (_toolbar != null)
-                _toolbar.NavigationClick -= OnNavigationClick;
+            Device.Info.PropertyChanged -= OnDevicePropertyChanged;
         }
         #endregion override
 
 
         #region methods
+        private MasterDetailPage GetMasterPage()
+        {
+            MasterDetailPage master = null;
+            Element page = Element.RealParent;
+            while (page != null)
+            {
+                if (page is MasterDetailPage masterPage)
+                {
+                    master = masterPage;
+                    break;
+                };
+
+                page = page.RealParent;
+            }
+
+            if (master == null)
+            {
+                if (PageController.InternalChildren.Count > 0)
+                    master = PageController.InternalChildren[0] as MasterDetailPage;
+            }
+
+            return master;
+        }
+
+        private void UpdateToolbarInterceptFunctional()
+        {
+            var views = new System.Collections.Generic.List<XfView>();
+            for (int i = 0; i < ChildCount; i++)
+            {
+                var child = GetChildAt(i);
+                views.Add(child);
+
+                if (child is Android.Support.V7.Widget.Toolbar toolbar)
+                    toolbar.SetNavigationOnClickListener(this);
+            }
+        }
+
         private Task OnBackPressed(PopSources source, PopResult popResult)
         {
             return NavPage.CatchBackButton(source, popResult);
         }
 
-        /// <summary>
-        /// Click "Button arrow back" with master page
-        /// </summary>
-        private async void OnNavigationClick(object sender, Android.Support.V7.Widget.Toolbar.NavigationClickEventArgs e)
+        private void OnDevicePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (NavPage.Parent is MasterDetailPage master)
-            {
-                int navCount = NavPage.Navigation.NavigationStack.Count;
-                int modCount = NavPage.Navigation.ModalStack.Count;
-
-                if (navCount <= 1 && modCount == 0)
-                {
-                    master.IsPresented = !master.IsPresented;
-                }
-                else
-                {
-                    await NavPage.CatchBackButton(PopSources.SoftwareBackButton, new PopResult());
-                }
-            }
-            else
-            {
-                NavPage?.PopAsync();
-            }
+            if (nameof(Device.Info.CurrentOrientation) == e.PropertyName)
+                UpdateToolbarInterceptFunctional();
         }
         #endregion methods
     }
