@@ -80,6 +80,9 @@ public partial class SamplePage : ContentPage, INavigationPopInterceptor
           InitializeComponent();
      }
      
+     // Important service property
+     public bool IsPopRequest { get; set; }
+     
      public async Task<bool> RequestPop()
      {
           bool res = true;
@@ -119,6 +122,9 @@ public class SampleVm : BaseViewModel, INavigationPopInterceptor
           //Do something...
      }
      
+     // Important service property
+     public bool IsPopRequest { get; set; }
+     
      public async Task<bool> RequestPop()
      {
           bool res = true;
@@ -132,3 +138,11 @@ public class SampleVm : BaseViewModel, INavigationPopInterceptor
      }
 }
 ```
+## License
+
+MIT Licensed
+
+## Donation
+If this project help you reduce time to develop, you can give me a cup of coffee :) :coffee: :pizza:
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://paypal.me/scriptboris?locale.x=ru_RU)
