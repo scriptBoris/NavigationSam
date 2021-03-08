@@ -84,12 +84,16 @@ namespace NavigationSam
 
         private async Task Pop(Page page, INavigationPopInterceptor interceptor)
         {
-            interceptor.IsPopRequest = true;
+            if (interceptor != null)
+                interceptor.IsPopRequest = true;
 
             if (IsModal(page))
                 await page.Navigation.PopModalAsync();
             else
                 await page.Navigation.PopAsync();
+
+            if (interceptor != null)
+                interceptor.IsPopRequest = false;
         }
 
         private Page GetDisplayPage()
