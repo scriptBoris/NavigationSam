@@ -80,6 +80,9 @@ public partial class SamplePage : ContentPage, INavigationPopInterceptor
           InitializeComponent();
      }
      
+     // Important service property
+     public bool IsPopRequest { get; set; }
+     
      public async Task<bool> RequestPop()
      {
           bool res = true;
@@ -118,6 +121,9 @@ public class SampleVm : BaseViewModel, INavigationPopInterceptor
      {
           //Do something...
      }
+     
+     // Important service property
+     public bool IsPopRequest { get; set; }
      
      public async Task<bool> RequestPop()
      {
