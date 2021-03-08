@@ -28,6 +28,7 @@ namespace Sample.Variant2.ViewModels
         public string AboutMe => App.CurrentUser.AboutMe;
 
         public override Page Page { get; set; } = new MainPage();
+        public bool IsPopRequest { get; set; }
 
         public async Task<bool> RequestPop()
         {

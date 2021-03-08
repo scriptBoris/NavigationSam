@@ -58,7 +58,7 @@ namespace NavigationSam
                 {
                     if (popSource == PopSources.SoftwareBackButton)
                     {
-                        await Pop(page);
+                        await Pop(page, interceptor);
                     }
                     else
                     {
@@ -68,7 +68,7 @@ namespace NavigationSam
                         }
                         else
                         {
-                            await Pop(page);
+                            await Pop(page, interceptor);
                         }
                     }
                 }
@@ -77,13 +77,15 @@ namespace NavigationSam
             {
                 if (popSource == PopSources.SoftwareBackButton)
                 {
-                    await Pop(page);
+                    await Pop(page, interceptor);
                 }
             }
         }
 
-        private async Task Pop(Page page)
+        private async Task Pop(Page page, INavigationPopInterceptor interceptor)
         {
+            interceptor.IsPopRequest = true;
+
             if (IsModal(page))
                 await page.Navigation.PopModalAsync();
             else

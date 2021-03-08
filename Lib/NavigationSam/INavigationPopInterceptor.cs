@@ -9,6 +9,11 @@ namespace NavigationSam
     [Preserve(AllMembers = true)]
     public interface INavigationPopInterceptor
     {
+        /// <summary>
+        /// Servise property for iOS
+        /// </summary>
+        bool IsPopRequest { get; set; }
+
         Task<bool> RequestPop();
     }
 }

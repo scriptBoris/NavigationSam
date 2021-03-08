@@ -28,6 +28,7 @@ namespace Sample.Variant2.ViewModels
         public ICommand CommandSave { get; set; }
 
         public override Page Page { get; set; } = new EditPage();
+        public bool IsPopRequest { get; set; }
 
         public async Task<bool> RequestPop()
         {

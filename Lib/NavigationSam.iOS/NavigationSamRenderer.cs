@@ -1,4 +1,5 @@
-﻿using NavigationSam;
+﻿using Foundation;
+using NavigationSam;
 using NavigationSam.iOS;
 using NavigationSam.Utils;
 using System;
@@ -31,15 +32,54 @@ namespace NavigationSam.iOS
             InteractivePopGestureRecognizer.Delegate = new SwipeBack(NavPage);
         }
 
-        // Software button back
-        public override UIViewController PopViewController(bool animated)
+        // Software button back (New implement, support iOS12-14)
+        [Export("navigationBar:shouldPopItem:")]
+        public bool ShouldPopItem(UINavigationBar navigationBar, UINavigationItem item)
         {
-            Device.BeginInvokeOnMainThread(async () =>
+            var page = NavPage.Navigation.NavigationStack.LastOrDefault();
+            if (page == null)
+                return true;
+
+            var pageIntercept = page as INavigationPopInterceptor;
+            var vmIntercept = page.BindingContext as INavigationPopInterceptor;
+
+            bool isReturn;
+            if (pageIntercept != null)
             {
-                await NavPage.CatchBackButton(PopSources.SoftwareBackButton, new PopResult());
-            });
-            return null;
+                isReturn = pageIntercept.IsPopRequest;
+            }
+            else if (vmIntercept != null)
+            {
+                isReturn = pageIntercept.IsPopRequest;
+            }
+            else
+            {
+                isReturn = true;
+            }
+
+            if (isReturn)
+            {
+                return true;
+            }
+            else
+            {
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await NavPage.CatchBackButton(PopSources.SoftwareBackButton, new PopResult());
+                });
+                return false;
+            }
         }
+
+        // Software button back (Old implement)
+        //public override UIViewController PopViewController(bool animated)
+        //{
+        //    Device.BeginInvokeOnMainThread(async () =>
+        //    {
+        //        await NavPage.CatchBackButton(PopSources.SoftwareBackButton, new PopResult());
+        //    });
+        //    return null;
+        //}
     }
 
     public class SwipeBack : UIGestureRecognizerDelegate

@@ -25,6 +25,8 @@ namespace Sample.Variant1
         public string Email => App.CurrentUser.Email;
         public string AboutMe => App.CurrentUser.AboutMe;
 
+        public bool IsPopRequest { get; set; }
+
         public async Task<bool> RequestPop()
         {
             bool res = await DisplayAlert("Question", "You are sure?", "Exit", "Cancel");

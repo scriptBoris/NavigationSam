@@ -31,7 +31,7 @@ namespace Sample.Variant1
         public DateTime DateBirth { get; set; } = App.CurrentUser.DateBirth;
         public string Email { get; set; } = App.CurrentUser.Email;
         public string AboutMe { get; set; } = App.CurrentUser.AboutMe;
-
+        public bool IsPopRequest { get; set; }
 
         public async Task<bool> RequestPop()
         {
