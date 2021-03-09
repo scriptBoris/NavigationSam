@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>NavigationSam</id>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
     <authors>Boris Krit</authors>
     <description>Allows intercept navigation back by user for Xamarin.Forms</description>
     <title>NavigationSam</title>
@@ -18,7 +18,7 @@
       <dependency id="Xamarin.Forms" version="4.5.0.725"/>
     </dependencies>
     <releaseNotes>
-- Fixed NullReferenceException in method Pop (NavigationPageSam), when page or viewModel dont implement INavigationPopInterceptor
+- Fixed NullReferenceException in iOS method ShouldPopItem
     </releaseNotes>
   </metadata>
 	<files>
