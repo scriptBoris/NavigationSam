@@ -50,7 +50,7 @@ namespace NavigationSam.iOS
             }
             else if (vmIntercept != null)
             {
-                isReturn = pageIntercept.IsPopRequest;
+                isReturn = vmIntercept.IsPopRequest;
             }
             else
             {
