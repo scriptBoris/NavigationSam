@@ -1,5 +1,6 @@
 ﻿using Android.Content;
 using Android.Views;
+using AndroidX.AppCompat.Widget;
 using NavigationSam;
 using NavigationSam.Droid;
 using NavigationSam.Utils;
@@ -70,13 +71,13 @@ namespace NavigationSam.Droid
 
 
         #region methods
-        private MasterDetailPage GetMasterPage()
+        private FlyoutPage GetMasterPage()
         {
-            MasterDetailPage master = null;
+            FlyoutPage master = null;
             Element page = Element.RealParent;
             while (page != null)
             {
-                if (page is MasterDetailPage masterPage)
+                if (page is FlyoutPage masterPage)
                 {
                     master = masterPage;
                     break;
@@ -88,7 +89,7 @@ namespace NavigationSam.Droid
             if (master == null)
             {
                 if (PageController.InternalChildren.Count > 0)
-                    master = PageController.InternalChildren[0] as MasterDetailPage;
+                    master = PageController.InternalChildren[0] as FlyoutPage;
             }
 
             return master;
@@ -102,7 +103,7 @@ namespace NavigationSam.Droid
                 var child = GetChildAt(i);
                 views.Add(child);
 
-                if (child is Android.Support.V7.Widget.Toolbar toolbar)
+                if (child is Toolbar toolbar)
                     toolbar.SetNavigationOnClickListener(this);
             }
         }
