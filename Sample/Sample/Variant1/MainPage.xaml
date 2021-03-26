@@ -4,7 +4,7 @@
              x:Class="Sample.Variant1.MainPage"
              Title="Your profile">
 
-    <Grid>
+    <Grid BackgroundColor="{AppThemeBinding Dark=#333, Light=#FFF, Default=#FFF}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
