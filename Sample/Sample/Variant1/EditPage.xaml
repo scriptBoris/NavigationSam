@@ -1,42 +1,61 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Sample.Variant1.EditPage"
-             Title="Edit"
-             BackgroundColor="{AppThemeBinding Dark=#333,Light=#FFF,Default=#FFF}">
+<ContentPage
+    x:Class="Sample.Variant1.EditPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="{AppThemeBinding Dark=#333,
+                                      Light=#FFF,
+                                      Default=#FFF}"
+    Title="Edit">
     <ScrollView>
         <StackLayout Margin="15">
-            
+
             <!--Close button for modal-->
-            <Button IsVisible="{Binding IsModal}"
-                    Margin="0,15,0,0"
-                    Text="Close"
-                    Clicked="OnClickedClose"/>
+            <Button
+                Margin="0,15,0,0"
+                Clicked="OnClickedClose"
+                Text="Close" />
 
             <!--Save button-->
-            <Button Text="Save"
-                    Clicked="OnClickedSave"/>
+            <Button
+                Clicked="OnClickedSave"
+                Text="Save" />
 
-            <Label Text="Name" Margin="0,10,0,0"/>
-            <Entry Text="{Binding Name}"
-                   FontSize="20"/>
+            <Label
+                Margin="0,10,0,0"
+                Text="Name" />
+            <Entry
+                FontSize="20"
+                Text="{Binding Name}" />
 
-            <Label Text="Family" Margin="0,10,0,0"/>
-            <Entry Text="{Binding Family}"
-                   FontSize="20"/>
+            <Label
+                Margin="0,10,0,0"
+                Text="Family" />
+            <Entry
+                FontSize="20"
+                Text="{Binding Family}" />
 
-            <Label Text="Date birth" Margin="0,10,0,0"/>
-            <DatePicker Date="{Binding DateBirth}"
-                        HorizontalOptions="StartAndExpand"
-                        FontSize="20"/>
+            <Label
+                Margin="0,10,0,0"
+                Text="Date birth" />
+            <DatePicker
+                Date="{Binding DateBirth}"
+                FontSize="20"
+                HorizontalOptions="StartAndExpand" />
 
-            <Label Text="Email" Margin="0,10,0,0"/>
-            <Entry Text="{Binding Email}"
-                   FontSize="20"/>
+            <Label
+                Margin="0,10,0,0"
+                Text="Email" />
+            <Entry
+                FontSize="20"
+                Text="{Binding Email}" />
 
-            <Label Text="About me" Margin="0,10,0,0"/>
-            <Entry Text="{Binding AboutMe}"
-                   FontSize="20"/>
+            <Label
+                Margin="0,10,0,0"
+                Text="About me" />
+            <Entry
+                FontSize="20"
+                Text="{Binding AboutMe}" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

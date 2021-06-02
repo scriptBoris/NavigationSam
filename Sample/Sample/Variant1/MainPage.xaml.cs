@@ -42,5 +42,10 @@ namespace Sample.Variant1
         {
             Navigation.PushModalAsync(new EditPage(true));
         }
+
+        private void OpenSamplePage(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new SamplePage());
+        }
     }
 }

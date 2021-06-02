@@ -144,7 +144,7 @@
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties TriggeredFromHotReload="False" />
+      <UserProperties TriggeredFromHotReload="False" XamarinHotReloadXFormsNugetUpgradeInfoBarSampleiOSHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

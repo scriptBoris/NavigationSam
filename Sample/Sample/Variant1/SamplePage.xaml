@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Sample.Variant1.SamplePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    NavigationPage.BackButtonTitle="BackButton">
+    <StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Button
+                Clicked="OnButtonBack"
+                HorizontalOptions="FillAndExpand"
+                Text="Back" />
+            <Button
+                Clicked="OnButtonNext"
+                HorizontalOptions="FillAndExpand"
+                Text="Next" />
+        </StackLayout>
+        <Button
+            Clicked="OnRemovePage"
+            Text="Remove previous page" />
+        <Button
+            Clicked="OnInsertBefore"
+            Text="Insert sample page before this" />
+        <Button
+            Clicked="OnNavigationRoot"
+            Text="Go to root" />
+        <Label
+            x:Name="labelCount"
+            FontSize="24"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand" />
+
+    </StackLayout>
+</ContentPage>

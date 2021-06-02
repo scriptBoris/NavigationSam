@@ -20,6 +20,7 @@ namespace NavigationSam
         }
 
         public bool IsRequestAppearing { get; private set; }
+        public bool IsEnableGestureBackForIOS { get; set; } = true;
 
         public virtual async Task CatchBackButton(PopSources popSource, PopResult popResult)
         {
