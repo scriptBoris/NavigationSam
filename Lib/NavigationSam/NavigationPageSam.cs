@@ -19,8 +19,20 @@ namespace NavigationSam
         {
         }
 
+        public static readonly BindableProperty IsEnableGestureBackForIOSProperty =
+            BindableProperty.Create(
+                nameof(IsEnableGestureBackForIOS),
+                typeof(bool),
+                typeof(NavigationPageSam),
+                true
+            );
+        public bool IsEnableGestureBackForIOS
+        {
+            get => (bool)GetValue(IsEnableGestureBackForIOSProperty);
+            set => SetValue(IsEnableGestureBackForIOSProperty, value);
+        }
+
         public bool IsRequestAppearing { get; private set; }
-        public bool IsEnableGestureBackForIOS { get; set; } = true;
 
         public virtual async Task CatchBackButton(PopSources popSource, PopResult popResult)
         {
