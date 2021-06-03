@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>NavigationSam</id>
-    <version>2.1.1</version>
+    <version>2.1.2</version>
     <authors>Boris Krit</authors>
     <description>Allows intercept navigation back by user for Xamarin.Forms</description>
     <title>NavigationSam</title>
@@ -18,7 +18,7 @@
       <dependency id="Xamarin.Forms" version="4.5.0.725"/>
     </dependencies>
     <releaseNotes>
-- Changed property IsEnableGestureBackForIOS, now this is bindable property
+- Fixed NavigationSamRenderer for iOS 12. Now impement native GestureRecognizer that custom back button
     </releaseNotes>
   </metadata>
 	<files>
