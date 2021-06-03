@@ -2,8 +2,14 @@
 <ContentPage
     x:Class="Sample.Variant1.SamplePage"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    NavigationPage.BackButtonTitle="BackButton">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Clicked="OnToolbarItemClicked"
+            Text="Update" />
+    </ContentPage.ToolbarItems>
+
     <StackLayout>
         <StackLayout Orientation="Horizontal">
             <Button
@@ -15,6 +21,11 @@
                 HorizontalOptions="FillAndExpand"
                 Text="Next" />
         </StackLayout>
+
+        <Entry
+            x:Name="entryNextPageTitle"
+            Placeholder="Next page title" />
+
         <Button
             Clicked="OnRemovePage"
             Text="Remove previous page" />

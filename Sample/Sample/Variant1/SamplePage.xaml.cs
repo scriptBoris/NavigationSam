@@ -10,53 +10,64 @@ using Xamarin.Forms.Xaml;
 
 namespace Sample.Variant1
 {
-	public partial class SamplePage : ContentPage, INavigationPopInterceptor
-	{
-		private int count = 0;
+    public partial class SamplePage : ContentPage, INavigationPopInterceptor
+    {
+        private int count = 0;
 
-        public SamplePage(int count = 1)
-		{
-			InitializeComponent();
-			this.count = count;
-			string title = $"Page {count}";
-			Title = title;
-			labelCount.Text = title;
-		}
+        public SamplePage(string title = "Sample page", int count = 1)
+        {
+            InitializeComponent();
+            this.count = count;
+
+            if (string.IsNullOrEmpty(title))
+                title = $"{count}";
+            else
+                title += $" {count}";
+
+            Title = title;
+            labelCount.Text = title;
+            entryNextPageTitle.Text = "Sample page";
+        }
 
         public bool IsPopRequest { get; set; }
 
         private void OnButtonNext(object sender, EventArgs e)
         {
-			var page = new SamplePage(count + 1);
-			Navigation.PushAsync(page);
+            var page = new SamplePage(entryNextPageTitle.Text, count + 1);
+            Navigation.PushAsync(page);
         }
 
-		private void OnButtonBack(object sender, EventArgs e)
-		{
-			Navigation.PopAsync();
-		}
+        private void OnButtonBack(object sender, EventArgs e)
+        {
+            Navigation.PopAsync();
+        }
 
         private void OnInsertBefore(object sender, EventArgs e)
         {
-			var page = new SamplePage(count + 1);
-			Navigation.InsertPageBefore(page, this);
-		}
+            var page = new SamplePage(entryNextPageTitle.Text, count + 1);
+            Navigation.InsertPageBefore(page, this);
+        }
 
         private void OnNavigationRoot(object sender, EventArgs e)
         {
-			Navigation.PopToRootAsync();
+            Navigation.PopToRootAsync();
         }
 
         private void OnRemovePage(object sender, EventArgs e)
         {
-			int count = Navigation.NavigationStack.Count;
-			var prev = Navigation.NavigationStack[count - 2];
-			Navigation.RemovePage(prev);
-		}
+            int count = Navigation.NavigationStack.Count;
+            var prev = Navigation.NavigationStack[count - 2];
+            Navigation.RemovePage(prev);
+        }
+
+        private void OnToolbarItemClicked(object sender, EventArgs e)
+        {
+            DisplayAlert("Success", "Toolbar item is worked!", "OK");
+        }
 
         public Task<bool> RequestPop()
         {
-			return Task.FromResult(true);
+            return Task.FromResult(true);
         }
-	}
+    }
 }
