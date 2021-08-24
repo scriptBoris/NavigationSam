@@ -4,7 +4,7 @@
              x:Class="Sample.MasterPage">
     <MasterDetailPage.Master>
         <ContentPage Title="Menu"
-                     BackgroundColor="{AppThemeBinding Dark=#222, Light=#CCC, Default=#CCC}">
+                     BackgroundColor="{AppThemeBinding Dark=#222, Light=#FFF, Default=#FFF}">
             <StackLayout>
                 <Label Text="MENU"
                        FontSize="26"
@@ -12,10 +12,8 @@
                        VerticalTextAlignment="Center"
                        HorizontalTextAlignment="Center"/>
 
-                <Button Text="Variant 1: Codebehind"
-                        Clicked="OnVariantCodeBehind"/>
-                <Button Text="Variant 2: MVVM"
-                        Clicked="OnVariantMvvm"/>
+                <Button Text="Go to root page"
+                        Clicked="OnButtonPopRoot"/>
             </StackLayout>
         </ContentPage>
     </MasterDetailPage.Master>

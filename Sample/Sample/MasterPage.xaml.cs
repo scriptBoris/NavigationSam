@@ -13,39 +13,40 @@ namespace Sample
 {
     public partial class MasterPage : MasterDetailPage
     {
-        private NavigationPage nav1;
-        private NavigationPage nav2;
+        private NavigationPage navigation;
 
         public MasterPage()
         {
             InitializeComponent();
 
             // Variant Code behind (for beginners)
-            nav1 = new NavigationPageSam(new MainPage());
-
-            // Variant MVVM (for pro)
-            nav2 = new Variant2.ViewModels.MainVm().NavigationPage;
+            navigation = new NavigationPageSam(new MainPage());
 
             // Disable swipe master menu for demonstration iOS (iPhone X)
             // allow to use system swipe back
             if (Device.RuntimePlatform == Device.iOS)
                 IsGestureEnabled = false;
 
-            Detail = nav1;
+            Detail = navigation;
         }
 
-        private void OnVariantCodeBehind(object sender, EventArgs e)
+        private async void OnButtonPopRoot(object sender, EventArgs e)
         {
-            Detail = nav1;
             IsPresented = !IsPresented;
+
+            // Do nothing if the user is already in the root page
+            // Since the root page listen BackButton, to display the program exit dialog
+            if (navigation.CurrentPage is MainPage)
+                return;
+
+            if (navigation.CurrentPage is INavigationPopInterceptor nav)
+            {
+                // If page dont permission back then do nothing
+                if (!await nav.RequestPop())
+                    return;
+            }
+
+            await navigation.PopToRootAsync();
         }
-
-        private void OnVariantMvvm(object sender, EventArgs e)
-        {
-            Detail = nav2;
-            IsPresented = !IsPresented;
-        }
-
-
     }
 }
